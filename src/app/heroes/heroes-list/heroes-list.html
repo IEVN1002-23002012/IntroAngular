@@ -1,6 +1,67 @@
 <div class="card">
+    <!-- Encabezado de la tarjeta -->
     <div class="card-head">
-        <h1>HEROES DRAGON BALL</h1>
-        div.
+        <h1>Heroes Dragon Ball</h1>
+    </div>
+
+    <!-- Cuerpo de la tarjeta -->
+    <div class="card-body">
+        
+        <!-- Sección de Filtro -->
+        <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+                <h3>Filtro:</h3>
+            </div>
+            <div class="col-md-4">
+                <input [(ngModel)]="listFilter" 
+                       type="text" 
+                       class="form-control" 
+                       placeholder="Ingrese nombre del Héroe">
+            </div>
+        </div>
+
+        <!-- Tabla de Héroes -->
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped" *ngIf="heroes && heroes.length > 0">
+                    <thead>
+                        <tr>
+                            <!-- Botón en la cabecera de la columna de imágenes -->
+                            <th>
+                                <button (click)="showImage()" class="btn btn-primary">
+                                    {{ muestraImage ? 'Ocultar ' : 'Muestra ' }} Imagen
+                                </button>
+                            </th>
+                            <th>Nombre:</th>
+                            <th>Descripción:</th>
+                            <th>Raza:</th>
+                            <th>Ki:</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let heroe of heroes">
+                            <td>
+                                <img *ngIf="muestraImage" 
+                                     [src]="heroe.imagen"
+                                     [style.width.px]="imageWidth"
+                                     [style.margin.px]="imageMargin"
+                                     alt="Imagen de {{ heroe.nombre }}">
+                            </td>
+                            <td>{{ heroe.nombre }}</td>
+                            <td>{{ heroe.descripcion }}</td>
+                            <td>{{ heroe.raza }}</td>
+                            <td>{{ heroe.ki }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Mensaje alternativo si no hay héroes -->
+                <div *ngIf="!heroes || heroes.length === 0" class="alert alert-warning mt-3">
+                    No hay héroes para mostrar.
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
